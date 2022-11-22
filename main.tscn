@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://cuop75drdu1c7"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_cvnih"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mi7t8"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4i1ha"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_vyn75"]
+
+[sub_resource type="Sky" id="Sky_526db"]
+sky_material = SubResource("PhysicalSkyMaterial_vyn75")
+
+[sub_resource type="Environment" id="Environment_47ioy"]
+background_mode = 2
+sky = SubResource("Sky_526db")
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_cvnih")
+
+[node name="XrOrigin3d" type="XROrigin3D" parent="."]
+
+[node name="XrCamera3d" type="XRCamera3D" parent="XrOrigin3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79203, 0)
+
+[node name="Left_Hand" type="XRController3D" parent="XrOrigin3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.859005, 1.01562, -2.12037)
+tracker = &"left_hand"
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="XrOrigin3d/Left_Hand"]
+transform = Transform3D(0.0617254, 0, 0, 0, 0.137091, 0, 0, 0, 0.177554, 0.186872, 0.141026, 0.655077)
+mesh = SubResource("BoxMesh_mi7t8")
+
+[node name="Right_Hand" type="XRController3D" parent="XrOrigin3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26015, 1.16413, -1.40976)
+tracker = &"right_hand"
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="XrOrigin3d/Right_Hand"]
+transform = Transform3D(0.0617254, 0, 0, 0, 0.137091, 0, 0, 0, 0.177554, -0.571803, 0.000729322, -0.0636134)
+mesh = SubResource("BoxMesh_mi7t8")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(9.63368, 0, 0, 0, 1, 0, 0, 0, 8.74686, 0, 0, 0)
+mesh = SubResource("PlaneMesh_4i1ha")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_47ioy")
+
+[node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.551529, 0.834155, 0, -0.834155, -0.551529, 0, 8.39085, 0)
